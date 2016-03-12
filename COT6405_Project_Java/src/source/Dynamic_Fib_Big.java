@@ -22,17 +22,21 @@ public class Dynamic_Fib_Big {
 
 	public static void main(String[] args) {
 		
-		BigInteger n = BigInteger.valueOf(10000);
+		BigInteger n = BigInteger.valueOf(150000);
 		long elapsedTime;
 		long startTime;
+		long theoryTime;
+		float c;
 		BigInteger fibN;
 		
 		try {
 			FileWriter writer = new FileWriter("results_dynamic_big.csv");
 			
-			writer.append("n, val, time\n");
+			writer.append("n,value,exp. time,thr. time,c\n");
 			
-			for (int i = 1; i <= n.intValue(); i++){
+			for (int i = 3000; i <= n.intValue(); i = i + 3000){
+				
+				System.out.println("Caculating Fib " + i + "\n");
 				
 				writer.append(Integer.toString(i) + ",");
 				
@@ -40,7 +44,15 @@ public class Dynamic_Fib_Big {
 				fibN = dynamic_fib(i);
 				elapsedTime = System.currentTimeMillis() - startTime;
 				
-				writer.append(fibN.toString() + "," + Long.toString(elapsedTime) + "\n");
+				theoryTime = i;
+				c = (float)elapsedTime/(float)theoryTime;
+				
+				writer.append(fibN.toString() + "," + 
+				Long.toString(elapsedTime) + "," + 
+				Long.toString(theoryTime) + "," +
+				Float.toString(c) + "," +
+				"\n");
+
 			}
 			
 			writer.flush();
@@ -50,6 +62,8 @@ public class Dynamic_Fib_Big {
 			e.printStackTrace();
 		}
 
+		System.out.println("Done.");
+		
 	}
 
 }

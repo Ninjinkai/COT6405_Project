@@ -19,14 +19,18 @@ public class Recursive_Fib {
 		long n = 50;
 		long elapsedTime;
 		long startTime;
+		long theoryTime;
+		float c;
 		long fibN;
 		
 		try {
 			FileWriter writer = new FileWriter("results_recursive.csv");
 			
-			writer.append("n, val, time\n");
+			writer.append("n,value,exp. time,thr. time,c\n");
 			
 			for (int i = 1; i <= n; i++){
+				
+				System.out.println("Caculating Fib " + i + "\n");
 				
 				writer.append(Integer.toString(i) + ",");
 				
@@ -34,9 +38,14 @@ public class Recursive_Fib {
 				fibN = recursive_fib(i);
 				elapsedTime = System.currentTimeMillis() - startTime;
 				
-				System.out.println("Fibonacci " + i + ": " + fibN);
-				System.out.println("time: " + elapsedTime);
-				writer.append(Long.toString(fibN) + "," + Long.toString(elapsedTime) + "\n");
+				theoryTime = (long) Math.pow(2, i);
+				c = (float)elapsedTime/(float)theoryTime;
+				
+				writer.append(Long.toString(fibN) + "," + 
+				Long.toString(elapsedTime) + "," + 
+				Long.toString(theoryTime) + "," +
+				Float.toString(c) + "," +
+				"\n");
 				
 			}
 			
@@ -47,6 +56,8 @@ public class Recursive_Fib {
 			e.printStackTrace();
 		}
 
+		System.out.println("Done.");
+		
 	}
 
 }
