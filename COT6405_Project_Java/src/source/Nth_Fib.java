@@ -1,3 +1,5 @@
+// COT6405 Spring 2016 Project
+// Nick Petty
 package source;
 
 import java.io.FileWriter;
